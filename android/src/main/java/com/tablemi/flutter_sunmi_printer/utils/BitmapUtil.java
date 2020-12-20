@@ -17,15 +17,7 @@ import java.util.Hashtable;
 import java.util.Map;
 
 public class BitmapUtil {
-    /**
-     * 生成条码bitmap
-     *
-     * @param content
-     * @param format
-     * @param width
-     * @param height
-     * @return
-     */
+
     public static Bitmap generateBitmap(String content, int format, int width, int height) {
         if (content == null || content.equals(""))
             return null;
@@ -104,14 +96,7 @@ public class BitmapUtil {
     }
 
 
-    /**
-     * 生成二维码 要转换的地址或字符串,可以是中文
-     *
-     * @param url
-     * @param width
-     * @param height
-     * @return
-     */
+
     public static Bitmap createQRImage(String url, final int width, final int height) {
         try {
             // 判断URL合法性
@@ -146,19 +131,17 @@ public class BitmapUtil {
         return null;
     }
 
-    /**
-     * 检查图片是否超过一定值，是则缩小
-     */
+
     public static Bitmap convertToThumb(byte[] buffer, float size)
     {
-        // 获取原图宽度
+
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         options.inPurgeable = true;
         options.inInputShareable = true;
         Bitmap bm = BitmapFactory.decodeByteArray(buffer, 0, buffer.length,
                 options);
-        // 计算缩放比例
+
         float reSize = options.outWidth / size;
         if (options.outWidth > options.outHeight)
         {
@@ -169,7 +152,7 @@ public class BitmapUtil {
             reSize = 1;
         }
         Log.d("bitmap", "convertToThumb, reSize:" + reSize);
-        // 缩放
+
         options.inJustDecodeBounds = false;
         options.inSampleSize = (int) reSize;
         if (bm != null && !bm.isRecycled())
